@@ -13,6 +13,6 @@
     }
   },
   "npmClient": "yarn",
-  "version": "2.6.37",
+  "version": "2.6.44",
   "useWorkspaces": true
 }
