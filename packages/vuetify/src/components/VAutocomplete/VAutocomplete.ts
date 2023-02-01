@@ -314,6 +314,10 @@ export default VSelect.extend({
 
       input.data = mergeData(input.data!, {
         attrs: {
+          role: 'combobox',
+          'aria-haspopup': 'listbox',
+          'aria-expanded': String(this.isMenuActive),
+          'aria-controls': this.computedOwns,
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
         },
@@ -323,11 +327,7 @@ export default VSelect.extend({
       return input
     },
     genInputSlot () {
-      const slot = VSelect.options.methods.genInputSlot.call(this)
-
-      slot.data!.attrs!.role = 'combobox'
-
-      return slot
+      return VSelect.options.methods.genInputSlot.call(this)
     },
     genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple

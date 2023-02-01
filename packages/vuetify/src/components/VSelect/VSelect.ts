@@ -427,8 +427,8 @@ export default baseMixins.extend<options>().extend({
           this.genClearIcon(),
           this.genIconSlot(),
           this.genHiddenInput(),
+          this.genMenu(),
         ]),
-        this.genMenu(),
         this.genProgress(),
       ]
     },
@@ -462,7 +462,11 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           readonly: true,
           type: 'text',
-          'aria-readonly': String(this.isReadonly),
+          role: 'combobox',
+          'aria-readonly': String(this.isReadonly === true ? true : false)
+          'aria-haspopup': 'listbox',
+          'aria-expanded': String(this.isMenuActive),
+          'aria-controls': this.computedOwns,
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
           placeholder: (!this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel)) ? this.placeholder : undefined,
@@ -486,10 +490,6 @@ export default baseMixins.extend<options>().extend({
 
       render.data!.attrs = {
         ...render.data!.attrs,
-        role: 'button',
-        'aria-haspopup': 'listbox',
-        'aria-expanded': String(this.isMenuActive),
-        'aria-owns': this.computedOwns,
       }
 
       return render
