@@ -111,6 +111,7 @@ export default baseMixins.extend<options>().extend({
     openOnClear: Boolean,
     returnObject: Boolean,
     smallChips: Boolean,
+    noCycle: Boolean,
   },
 
   data () {
@@ -799,7 +800,7 @@ export default baseMixins.extend<options>().extend({
       // Multiple selects do not cycle their value
       // when pressing up or down, instead activate
       // the menu
-      if (this.multiple) return this.activateMenu()
+      if (this.noCycle || this.multiple) return this.activateMenu()
 
       const keyCode = e.keyCode
 
