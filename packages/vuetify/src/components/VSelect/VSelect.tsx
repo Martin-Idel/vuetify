@@ -170,7 +170,6 @@ export const VSelect = genericComponent<new <
     const form = useForm()
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
-    const label = computed(() => menu.value ? props.closeText : props.openText)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
@@ -375,7 +374,6 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          title={ t(label.value) }
         >
           {{
             ...slots,

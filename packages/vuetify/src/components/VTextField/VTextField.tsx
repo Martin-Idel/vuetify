@@ -40,6 +40,10 @@ export const makeVTextFieldProps = propsFactory({
     type: String,
     default: 'text',
   },
+  requiresFurtherDescriptions: {
+    type: Boolean,
+    default: false,
+  },
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeVInputProps(),
@@ -229,6 +233,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         onBlur={ blur }
                         aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
+                        aria-describedby={ props.requiresFurtherDescriptions ? `${id.value}-details` : slotProps['aria-describedby'] as string } // TODO: the slotProps gets the described-by. Maybe that's just an error?
                         { ...inputAttrs }
                       />
                     )
@@ -246,6 +251,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         { slots.default ? (
                           <div
                             class={ fieldClass }
+                            id={ `${id.value}-details` }
                             data-no-activator=""
                           >
                             { slots.default() }

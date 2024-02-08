@@ -454,6 +454,7 @@ export const VAutocomplete = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
+          requiresFurtherDescriptions
           onKeydown={ onKeydown }
         >
           {{
